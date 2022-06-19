@@ -9,7 +9,9 @@ plugins:
   - autolinks
   - search # necessary for search to work
   - git-revision-date-localized:
-    type: timeago
+      type: timeago
+  - minify:
+      minify_html: true
 
 theme: 
   name: material
