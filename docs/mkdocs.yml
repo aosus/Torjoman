@@ -10,6 +10,7 @@ theme:
   custom_dir: overrides
   icon:
     repo: fontawesome/brands/github
+  font: false
   features:
     - search.suggest 
     - search.highlight
@@ -35,6 +36,9 @@ theme:
       name: Switch to light mode
     primary: green
     accent: blue
+
+extra_css:
+  - extra.css
 
 nav:
   - المقدمة: "index.md" 
