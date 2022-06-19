@@ -17,5 +17,4 @@ theme:
 
 nav:
   - المقدمة: "index.md" 
-  - جدول المحتويات: "pages/Contents-Table.md"
-  - سجل المراجعة: "pages/Revision-History.md"
+  - جدول المحتويات: "SRS.md"
