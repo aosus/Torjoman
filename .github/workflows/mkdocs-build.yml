@@ -38,10 +38,13 @@ jobs:
       run: mkdocs build --clean --verbose -d site
 
     - name: Deploy 🚀
-      uses: JamesIves/github-pages-deploy-action@v4.3.3
+      uses: JamesIves/github-pages-deploy-action@v4
       with:
         branch: gh-pages # The branch the action should deploy to.
         folder: site # The folder the action should deploy.
+        clean-exclude: pr-preview/ # Exclude PR previews
+        git-config-name: GitHub-actions[bot]
+        git-config-email: 41898282+github-actions[bot]@users.noreply.github.com
 
     - name: Cache pip files
       uses: actions/cache@v3.0.4
