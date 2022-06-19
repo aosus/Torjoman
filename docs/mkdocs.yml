@@ -5,6 +5,10 @@ repo_name: aosus/Torjoman
 repo_url: https://github.com/aosus/Torjoman
 edit_uri: https://github.com/aosus/Torjoman/_edit/dev/docs/source
 
+plugins:
+  - autolinks
+  - search # necessary for search to work
+
 theme: 
   name: material
   custom_dir: overrides
