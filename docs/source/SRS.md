@@ -1,4 +1,4 @@
- مواصفات المتطلبات البرمجية لمشروع رقيب | Software Requirements Specification [SRS] for RAQEEB
+ مواصفات المتطلبات البرمجية لمشروع  تُرجمان | Software Requirements Specification [SRS] for Torjoman
 
 
 
