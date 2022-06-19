@@ -1,6 +1,7 @@
 site_name:  Torjoman | تُرجمان
 docs_dir: 'source'
 site_url: https://torojoman.aosus.dev
+
 theme: 
   name: material
   features:
@@ -9,7 +10,10 @@ theme:
     - content.tabs.link
   language: ar 
   direction: rtl
-  palette: indigo
+  palette:
+    primary: green
+    accent: blue
+
 nav:
   - المقدمة: "index.md" 
   - جدول المحتويات: "pages/Contents-Table.md"
