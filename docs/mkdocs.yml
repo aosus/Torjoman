@@ -4,6 +4,7 @@ site_url: https://torojoman.aosus.dev
 
 theme: 
   name: material
+  custom_dir: overrides
   features:
     - search.suggest 
     - search.highlight
