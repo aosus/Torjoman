@@ -14,6 +14,7 @@ theme:
     - search.suggest 
     - search.highlight
     - content.tabs.link
+    - navigation.instant
   language: ar 
   direction: rtl
   palette:
