@@ -41,7 +41,7 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         branch: gh-pages # The branch the action should deploy to.
-        folder: site # The folder the action should deploy.
+        folder: docs/site # The folder the action should deploy.
         clean-exclude: pr-preview/ # Exclude PR previews
         git-config-name: GitHub-actions[bot]
         git-config-email: 41898282+github-actions[bot]@users.noreply.github.com
