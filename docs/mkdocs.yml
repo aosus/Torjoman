@@ -3,7 +3,7 @@ docs_dir: 'source'
 site_url: https://torojoman.aosus.dev
 repo_name: aosus/Torjoman
 repo_url: https://github.com/aosus/Torjoman
-edit_uri: https://github.com/aosus/Torjoman/_edit/dev/docs/source
+edit_uri: https://github.com/aosus/Torjoman/edit/dev/docs/source
 
 plugins:
   - autolinks
