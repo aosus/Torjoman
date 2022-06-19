@@ -1,10 +1,15 @@
 site_name:  Torjoman | تُرجمان
 docs_dir: 'source'
 site_url: https://torojoman.aosus.dev
+repo_name: aosus/Torjoman
+repo_url: https://github.com/aosus/Torjoman
+edit_uri: https://github.com/aosus/Torjoman/_edit/dev/docs/source
 
 theme: 
   name: material
   custom_dir: overrides
+  icon:
+    repo: fontawesome/brands/github
   features:
     - search.suggest 
     - search.highlight
