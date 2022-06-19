@@ -1,4 +1,5 @@
 site_name:  Torjoman | تُرجمان
+docs_dir: 'source'
 theme: 
   name: material
   features:
