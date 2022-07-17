@@ -8,3 +8,5 @@
 
 هذا المشروع تابع لمجتمع أسس https://aosus.org 
 
+## الترخيص
+مشروع تُرجمان تحت ترخيص [AGPLv3](https://github.com/aosus/Torjoman/blob/dev/LICENSE)
