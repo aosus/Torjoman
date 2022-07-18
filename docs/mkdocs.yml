@@ -61,4 +61,4 @@ extra_css:
 
 nav:
   - المقدمة: "index.md" 
-  - المتطلبات البرمجية: "SRS.md"
+  - خطة مشروع تُرجمان: "project-plan.md"
