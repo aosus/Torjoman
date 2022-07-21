@@ -56,6 +56,9 @@ extra:
     - icon: matrix
       link: https://matrix.to/#/#aosus:aosus.org
 
+markdown_extensions:
+  - admonition
+
 extra_css:
   - extra.css
 
