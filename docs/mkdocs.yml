@@ -56,9 +56,12 @@ extra:
     - icon: matrix
       link: https://matrix.to/#/#aosus:aosus.org
 
+markdown_extensions:
+  - admonition
+
 extra_css:
   - extra.css
 
 nav:
   - المقدمة: "index.md" 
-  - المتطلبات البرمجية: "SRS.md"
+  - خطة مشروع تُرجمان: "project-plan.md"
