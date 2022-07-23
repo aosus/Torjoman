@@ -9,7 +9,7 @@ https://torjoman.aosus.dev
 
 ## Flowchart
 
-https://torjoman.aosus.dev/pr-preview/pr-7/project-plan/#_3
+https://torjoman.aosus.dev/project-plan/#_3
 
 ## License
 Torjoman is licensed under the AGPLv3
