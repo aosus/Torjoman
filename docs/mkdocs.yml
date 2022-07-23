@@ -4,6 +4,7 @@ site_url: https://torojoman.aosus.dev
 repo_name: aosus/Torjoman
 repo_url: https://github.com/aosus/Torjoman
 edit_uri: https://github.com/aosus/Torjoman/edit/dev/docs/source
+site_description: ترجم من داخل منصتك المفضلة!
 
 plugins:
   - autolinks
