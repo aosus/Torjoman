@@ -57,6 +57,8 @@ extra:
       link: https://t.me/aosus
     - icon: matrix
       link: https://matrix.to/#/#aosus:aosus.org
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/company/aosus/
 
 markdown_extensions:
   - admonition
