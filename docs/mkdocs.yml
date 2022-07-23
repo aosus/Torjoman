@@ -24,6 +24,8 @@ theme:
     - search.highlight
     - content.tabs.link
     - navigation.instant
+    - navigation.tracking
+    - toc.integrate
   language: ar 
   direction: rtl
   palette:
