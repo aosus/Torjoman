@@ -3,3 +3,21 @@
 {% block analytics %}
     <script defer data-domain="torjoman.aosus.dev" src="https://pa.aosus.org/js/pls4.js"></script>
 {% endblock %}
+
+{% block extrahead %}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Torjoman | تُرجمان" />
+    <meta property="og:title" content="{{ title }}" />
+    <meta property="og:description" content="{{ config.site_description }}" />
+    <meta property="og:url" content="{{ page.canonical_url }}" />
+    <meta property="og:image" content="https://aosus.org/wp-content/uploads/2022/07/aosus-torjoman.jpg"/>
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:width" content="1920" />
+    <meta property="og:image:height" content="1080" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@aosusorg" />
+    <meta name="twitter:creator" content="@aosusorg" />
+    <meta name="twitter:title" content="{{ title }}" />
+    <meta name="twitter:description" content="{{ config.site_description }}" />
+    <meta name="twitter:image" content="https://aosus.org/wp-content/uploads/2022/07/aosus-torjoman.jpg" />
+{% endblock %}
