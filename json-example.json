@@ -1,0 +1,16 @@
+[
+  {
+    "word": "Hello",
+    "is_checked": false,
+    "translates": [
+      "Hola"
+    ]
+  },
+  {
+    "word": "Ping",
+    "is_checked": true,
+    "translates": [
+      "Pong"
+    ]
+  }
+]
