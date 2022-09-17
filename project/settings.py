@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'ninja',
     
     'cache_json.apps.CacheJsonConfig',
+    'translate.apps.TranslateConfig',
+    'translators.apps.TranslatorsConfig',
 ]
 
 MIDDLEWARE = [
