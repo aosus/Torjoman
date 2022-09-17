@@ -67,5 +67,6 @@ def push(_payload: dict):
   print('Finished Push Event')
   
   
-if local_json_file.read_text() == '{}':
+if (local_json_file.read_text() == '{}') or (Word.objects.count() == 0):
   check_for_update_json()
+  print('The first data extraction process has been completed')

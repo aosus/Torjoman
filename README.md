@@ -11,6 +11,36 @@ https://torjoman.aosus.dev
 
 https://torjoman.aosus.dev/project-plan/#_3
 
+## How to run
+1. Install dependencies
+   * Using pipenv
+    	```pipenv install```
+   * Using pip
+		```pip install -r requirements.txt```
+2. Create `.env` file
+   Create a .env file in `project` and fill it with the following data
+   ```
+   SECRET_KEY=
+   GITHUB_WEBHOOK_KEY=
+   DATABASE_NAME=
+   DATABASE_USER=
+   DATABASE_PASSWORD=
+   DATABASE_HOST=
+   DATABASE_PORT=5432
+   JSON_REPO=GtihubUser/REPO
+   JSON_FILE=PathToJsonFileInYourRepo
+   ```
+   json file format example can be found in `json-example.json`
+3. Run ```python project/prepare-project.py```
+4. Create superuser account, Run ```python manage.py createsuperuser```
+5. Run ```python manage.py migrate```
+6. Run server. see [Here](https://docs.djangoproject.com/en/4.1/howto/deployment/)
+7. Wait for the server to finish extracting data from the json file. It will print `The first data extraction process has been completed` when it finishes
+8. Set your github webhook payload url to `https://your-domain.com/api/webhook/`. Don't forget to set webhook key
+9. Add some platfroms endpoints to deal with from `htStps://your-domain.com/admin`
+
+
+
 ## License
 Torjoman is licensed under the AGPLv3
 
