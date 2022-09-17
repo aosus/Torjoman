@@ -3,6 +3,7 @@ from django.db import models
 class Word(models.Model):
   word = models.CharField(max_length=255, unique=True)
   translators = models.ManyToManyField("translators.Translator")
+  prs = models.ManyToManyField('github_manager.PullRequest', blank=True)
     
   def get_translates(self) -> list["Translate"]:
     return [translate.translate for translate in self.translate_set.all().order_by('score')]

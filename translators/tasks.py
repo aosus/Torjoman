@@ -1,4 +1,4 @@
-from .models import Translator,  Platform
+from .models import Translator
 from translate.models import Word
 from datetime import datetime
 import requests
@@ -6,7 +6,7 @@ import requests
 def send_words():
   now = datetime.now()
   # users = Translator.objects.filter(send_time=f"{now.hour}:{now.minute}")
-  users = Translator.objects.all() # Temp Only
+  users = Translator.objects.all()
   print(f'Sending for {users.count()} users')
   for user in users:
     words: list[Word] = Word.objects.exclude(translators__in=[user]).order_by('word')[:user.number_of_words]

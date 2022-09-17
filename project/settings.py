@@ -32,6 +32,8 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    '5386-2a09-bac0-470-00-812-324a.eu.ngrok.io',
+    '127.0.0.1'
 ]
 
 
@@ -45,10 +47,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'ninja',
-    
+    'django_q',
+
     'cache_json.apps.CacheJsonConfig',
     'translate.apps.TranslateConfig',
     'translators.apps.TranslatorsConfig',
+    'github_manager.apps.GithubManagerConfig',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +142,17 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+
+Q_CLUSTER = {
+    "name": "torjoman",
+    'retry': 750,
+    'timeout': 600,
+    'redis': {
+        'host': '127.0.0.1',
+        'port': 6379,
+        'db': 0
+    }
+}
+
+
+GITHUB_WEBHOOK_KEY = env('GITHUB_WEBHOOK_KEY')

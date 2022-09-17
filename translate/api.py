@@ -5,7 +5,7 @@ from ninja import Router
 from . import schemas
 from django.conf import settings
 from .models import Translate, Word
-from source.models import Word as SourceWord
+from cache_json.models import Word as SourceWord
 from translators.models import Translator
 from ninja.errors import AuthenticationError
 #This is for Arabic Only
