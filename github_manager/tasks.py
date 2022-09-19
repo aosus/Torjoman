@@ -8,7 +8,7 @@ from django.conf import settings
 from cache_json.models import Word, Translate
 
 
-account = Github('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')
+account = Github(os.environ.get("GITHUB_ACCOUNT_TOKEN"))
 dictionary_repo = account.get_repo(os.environ.get('JSON_REPO'))
 local_json_file: Path = (settings.BASE_DIR / 'local_dictionary.json').resolve()
 
@@ -67,6 +67,6 @@ def push(_payload: dict):
   print('Finished Push Event')
   
   
-if (local_json_file.read_text() == '{}') or (Word.objects.count() == 0):
+if local_json_file.read_text() == '{}':
   check_for_update_json()
   print('The first data extraction process has been completed')
