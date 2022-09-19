@@ -21,6 +21,8 @@ https://torjoman.aosus.dev/project-plan/#_3
    Create a .env file in `project` and fill it with the following data
    ```
    SECRET_KEY=
+   HOST=
+   GITHUB_ACCOUNT_TOKEN
    GITHUB_WEBHOOK_KEY=
    DATABASE_NAME=
    DATABASE_USER=
@@ -34,10 +36,13 @@ https://torjoman.aosus.dev/project-plan/#_3
 3. Run ```python project/prepare-project.py```
 4. Create superuser account, Run ```python manage.py createsuperuser```
 5. Run ```python manage.py migrate```
-6. Run server. see [Here](https://docs.djangoproject.com/en/4.1/howto/deployment/)
-7. Wait for the server to finish extracting data from the json file. It will print `The first data extraction process has been completed` when it finishes
-8. Set your github webhook payload url to `https://your-domain.com/api/webhook/`. Don't forget to set webhook key
-9. Add some platfroms endpoints to deal with from `htStps://your-domain.com/admin`
+6. Static Files (css, js, images)
+      1. Run ```python manage.py collectstatic```
+      2. serve static folder, see [here](https://docs.djangoproject.com/en/4.1/howto/static-files/deployment/)
+7. Run server. see [Here](https://docs.djangoproject.com/en/4.1/howto/deployment/)
+8. Wait for the server to finish extracting data from the json file. It will print `The first data extraction process has been completed` when it finishes
+9.  Set your github webhook payload url to `https://your-domain.com/api/webhook/`. Don't forget to set webhook key
+10. Add some platfroms endpoints to deal with from `htStps://your-domain.com/admin`
 
 
 
