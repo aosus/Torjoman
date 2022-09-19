@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Word, Translate
+from .models import Word, UserTranslate
 # Register your models here.
 class TranslateAdminInline(admin.TabularInline):
-  model = Translate
+  model = UserTranslate
 
 class WordAdmin(admin.ModelAdmin):
   inlines = (TranslateAdminInline, )

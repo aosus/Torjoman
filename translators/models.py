@@ -7,6 +7,7 @@ class Translator(models.Model):
   name = models.CharField(max_length=255)
   number_of_words = models.IntegerField('Number of words to send')
   send_time = models.TimeField()
+  translated_words = models.ManyToManyField('translate.Word', blank=True)
   
   def __str__(self) -> str:
     return self.name

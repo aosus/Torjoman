@@ -1,11 +1,11 @@
-from translate.models import Word as TWord, Translate as TTranslate
+# from translate.models import Word as TWord, Translate as TTranslate
 from .models import PullRequest
 from github import Github
 import json
 import os
 from pathlib import Path
 from django.conf import settings
-from cache_json.models import Word, Translate
+# from cache_json.models import Word, Translate
 
 
 account = Github(os.environ.get("GITHUB_ACCOUNT_TOKEN"))
@@ -68,5 +68,5 @@ def push(_payload: dict):
   
   
 if local_json_file.read_text() == '{}':
-  check_for_update_json()
+  # check_for_update_json()
   print('The first data extraction process has been completed')
