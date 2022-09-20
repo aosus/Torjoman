@@ -3,45 +3,45 @@ from .utils import get_close_match
 
 
 class Word(models.Model):
-	word = models.CharField(max_length=255, unique=True)
-	is_checked = models.BooleanField(default=False)
+    word = models.CharField(max_length=255, unique=True)
+    is_checked = models.BooleanField(default=False)
 
-	class Meta:
-		ordering = ["word"]
+    class Meta:
+        ordering = ["word"]
 
-	def get_source_translations(self) -> list[str]:
-		return [translate.translate for translate in self.sourcetranslation_set.all()]
+    def get_source_translations(self) -> list[str]:
+        return [translate.translate for translate in self.sourcetranslation_set.all()]
 
-	def get_users_translations(self) -> list[str]:
-		return [translate.translate for translate in self.usertranslation_set.all()]
+    def get_users_translations(self) -> list[str]:
+        return [translate.translate for translate in self.usertranslation_set.all()]
 
-	def add_translation(self, translation: str) -> "UserTranslation":
-		"""add_translation Add new `UserTranslation` to word and increase score if similar translation was found.
+    def add_translation(self, translation: str) -> "UserTranslation":
+        """add_translation Add new `UserTranslation` to word and increase score if similar translation was found.
 
-		Args:
-			translation (str): the translation to compare and add/increase score.
+        Args:
+                translation (str): the translation to compare and add/increase score.
 
-		Returns:
-			UserTranslation: The new/similar translation object.
-			None: if the translation was empty.
-		"""
-		translation = translation.strip()
-		if translation == "":
-			return
-		match = get_close_match(translation, self.get_users_translations())
-		if match:
-				t: UserTranslation = UserTranslation.objects.get(
-						word=self, translation=match
-				)
-				t.score += 1
-				t.save()
-		else:
-				t = UserTranslation(word=self, translation=translation)
-				t.save()
-		return t
+        Returns:
+                UserTranslation: The new/similar translation object.
+                None: if the translation was empty.
+        """
+        translation = translation.strip()
+        if translation == "":
+            return
+        match = get_close_match(translation, self.get_users_translations())
+        if match:
+            t: UserTranslation = UserTranslation.objects.get(
+                word=self, translation=match
+            )
+            t.score += 1
+            t.save()
+        else:
+            t = UserTranslation(word=self, translation=translation)
+            t.save()
+        return t
 
-	def __str__(self) -> str:
-		return self.word
+    def __str__(self) -> str:
+        return self.word
 
 
 class TranslationBase(models.Model):

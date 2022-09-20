@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_q",
     "ninja",
-    
     "translation.apps.TranslationConfig",
     "translators.apps.TranslatorsConfig",
     "github_manager.apps.GithubManagerConfig",

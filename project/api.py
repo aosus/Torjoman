@@ -6,9 +6,9 @@ from github_manager.webhook import router as github_manager_router
 
 
 api = NinjaAPI(
-	title='Torjoman Core API',
-	version='1.0',
-	description='This is the Torjoman Core API',
+    title="Torjoman Core API",
+    version="1.0",
+    description="This is the Torjoman Core API",
 )
 
 api.add_router("/translate", translate_router)
