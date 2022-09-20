@@ -1,5 +1,5 @@
 from .models import Translator
-from translate.models import Word
+from translation.models import Word
 from datetime import datetime
 import requests
 
