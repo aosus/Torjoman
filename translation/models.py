@@ -9,11 +9,17 @@ class Word(models.Model):
     class Meta:
         ordering = ["word"]
 
+    @property
     def get_source_translations(self) -> list[str]:
-        return [translate.translate for translate in self.sourcetranslation_set.all()]
+        return [
+            translation.translation for translation in self.sourcetranslation_set.all()
+        ]
 
+    @property
     def get_users_translations(self) -> list[str]:
-        return [translate.translate for translate in self.usertranslation_set.all()]
+        return [
+            translation.translation for translation in self.usertranslation_set.all()
+        ]
 
     def add_translation(self, translation: str) -> "UserTranslation":
         """add_translation Add new `UserTranslation` to word and increase score if similar translation was found.
@@ -52,7 +58,7 @@ class TranslationBase(models.Model):
         abstract = True
 
     def __str__(self) -> str:
-        return f"{self.word}-{self.translate}"
+        return f"{self.word}-{self.translation}"
 
 
 class SourceTranslation(TranslationBase):
@@ -61,11 +67,11 @@ class SourceTranslation(TranslationBase):
     def save(self, *args, **kwargs) -> None:
         if self.is_default:
             try:
-                last_default_translate = SourceTranslation.objects.get(
+                last_default_translation = SourceTranslation.objects.get(
                     word=self.word, is_default=True
                 )
-                last_default_translate.is_default = False
-                last_default_translate.save()
+                last_default_translation.is_default = False
+                last_default_translation.save()
             except SourceTranslation.DoesNotExist:
                 pass
         return super().save(*args, **kwargs)

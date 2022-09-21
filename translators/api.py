@@ -24,7 +24,7 @@ def register(request, payload: schemas.TranslatorRegister):
     return 200, translator
 
 
-@router.post("/login", response={200: schemas.Translator, 404: Http404})
+@router.post("/login", response={200: schemas.Translator})
 def login(request, payload: schemas.TranslatorLogin):
     translator = get_object_or_404(Translator, uuid=payload.uuid)
     platforms = Platform.get_all_platforms()
