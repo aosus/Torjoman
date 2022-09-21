@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Word, UserTranslation, SourceTranslation
+
+from .models import SourceTranslation, UserTranslation, Word
 
 # Register your models here.
 

@@ -1,13 +1,15 @@
 import hmac
-from hashlib import sha1
 import json
-from ninja import Router
-from django.conf import settings
-from django.http import HttpResponse, HttpResponseForbidden, HttpResponseServerError
-from django.utils.encoding import force_bytes
-from .tasks import push
 import threading
+from hashlib import sha1
 
+from django.conf import settings
+from django.http import (HttpResponse, HttpResponseForbidden,
+                         HttpResponseServerError)
+from django.utils.encoding import force_bytes
+from ninja import Router
+
+from .tasks import push
 
 router = Router()
 

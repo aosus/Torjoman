@@ -1,4 +1,5 @@
 from django.db import models
+
 from .utils import get_close_match
 
 

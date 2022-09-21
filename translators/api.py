@@ -1,8 +1,9 @@
-from ninja import Router
-from . import schemas
-from django.shortcuts import get_object_or_404
-from .models import Translator, Platform
 from django.http import Http404
+from django.shortcuts import get_object_or_404
+from ninja import Router
+
+from . import schemas
+from .models import Platform, Translator
 
 router = Router()
 

@@ -1,7 +1,10 @@
-from .models import Translator
-from translation.models import Word
 from datetime import datetime
+
 import requests
+
+from translation.models import Word
+
+from .models import Translator
 
 
 def send_words():

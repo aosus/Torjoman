@@ -1,7 +1,9 @@
 from django.shortcuts import get_object_or_404
 from ninja import Router
 from ninja.errors import AuthenticationError
+
 from translators.models import Translator
+
 from . import schemas
 from .models import Word
 from .utils import modify_translation

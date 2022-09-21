@@ -1,11 +1,14 @@
-from .models import PullRequest
-from github import Github
+import itertools
 import json
 import os
 from pathlib import Path
+
 from django.conf import settings
-import itertools
-from translation.models import Word, SourceTranslation
+from github import Github
+
+from translation.models import SourceTranslation, Word
+
+from .models import PullRequest
 
 account = Github(os.environ.get("GITHUB_ACCOUNT_TOKEN"))
 dictionary_repo = account.get_repo(os.environ.get("JSON_REPO"))

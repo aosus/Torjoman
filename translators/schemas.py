@@ -1,6 +1,8 @@
 from typing import List
 from uuid import UUID
-from ninja import ModelSchema, Schema, Field
+
+from ninja import Field, ModelSchema, Schema
+
 from .models import Translator as TranslatorModel
 
 

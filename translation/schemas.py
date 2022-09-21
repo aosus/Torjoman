@@ -1,6 +1,8 @@
 from uuid import UUID
-from ninja import Schema, ModelSchema, Field
-from .models import Word, SourceTranslation, UserTranslation
+
+from ninja import Field, ModelSchema, Schema
+
+from .models import SourceTranslation, UserTranslation, Word
 
 
 class WordIn(ModelSchema):

@@ -1,9 +1,9 @@
 from django.conf import settings
 from ninja import NinjaAPI
+
+from github_manager.webhook import router as github_manager_router
 from translation.api import router as translate_router
 from translators.api import router as translators_router
-from github_manager.webhook import router as github_manager_router
-
 
 api = NinjaAPI(
     title="Torjoman Core API",
