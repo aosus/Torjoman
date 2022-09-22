@@ -78,7 +78,7 @@ class SourceTranslation(TranslationBase):
         return super().save(*args, **kwargs)
 
     class Meta(TranslationBase.Meta):
-        ordering = ("is_default", "translation")
+        ordering = ("-is_default", "translation")
 
 
 class UserTranslation(TranslationBase):
