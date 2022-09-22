@@ -74,7 +74,7 @@ def update_source(local: list[dict], server: list[dict]):
             translation.delete()
 
 
-def push(_payload: dict):
+def handle_push(_payload: dict):
     print("New Push Event")
     check_for_update_json()
     print("Finished Push Event")

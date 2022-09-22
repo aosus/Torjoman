@@ -40,7 +40,7 @@ def manage_webhooks(request):
     if event == "ping":
         return HttpResponse("pong")
     elif event == "push":
-        t = threading.Thread(target=push, args=(json.loads(request.body),))
+        t = threading.Thread(target=handle_push, args=(json.loads(request.body),))
         t.start()
         return HttpResponse("success")
     # In case we receive an event that's not ping or push
