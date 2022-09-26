@@ -52,7 +52,7 @@ def update_source(local: list[dict], server: list[dict]):
         x["word"] for x in rserver if x["word"] not in [i["word"] for i in rlocal]
     ]
     for word in deleted_words:
-        w: Word = Word.objects.get(word)
+        w: Word = Word.objects.get(word=word)
         w.delete()
     for word in rlocal:
         w: Word = Word.objects.get_or_create(word=word["word"])[0]
