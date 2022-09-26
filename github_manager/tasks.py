@@ -48,11 +48,11 @@ def generate_dict_from_db() -> list[dict]:
 def update_source(local: list[dict], server: list[dict]):
     rlocal = list(itertools.filterfalse(lambda x: x in local, server))
     rserver = list(itertools.filterfalse(lambda x: x in server, local))
-    deleted_words: str = [
+    deleted_words: list[str] = [
         x["word"] for x in rserver if x["word"] not in [i["word"] for i in rlocal]
     ]
     for word in deleted_words:
-        w: Word = Word.objects.get(word["word"])
+        w: Word = Word.objects.get(word)
         w.delete()
     for word in rlocal:
         w: Word = Word.objects.get_or_create(word=word["word"])[0]
