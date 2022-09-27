@@ -85,4 +85,4 @@ class UserTranslation(TranslationBase):
     score = models.PositiveIntegerField(default=0)
 
     class Meta(TranslationBase.Meta):
-        ordering = ("score", "translation")
+        ordering = ("-score", "translation")
