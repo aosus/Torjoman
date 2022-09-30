@@ -3,8 +3,8 @@ from django.db import models
 
 # Create your models here.
 class PullRequest(models.Model):
-    prid = models.IntegerField()
-    words = models.ForeignKey("translation.Word")
+    number = models.IntegerField()
+    word = models.ForeignKey("translation.Word", on_delete=models.CASCADE)
 
 class Moderator(models.Model):
     username = models.CharField(max_length=255)
