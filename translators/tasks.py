@@ -13,7 +13,7 @@ def send_words():
     users = Translator.objects.all()
     print(f"Sending for {users.count()} users")
     for user in users:
-        words: list[Word] = Word.objects.exclude(translators__in=[user]).order_by(
+        words: list[Word] = Word.objects.filter(pullrequest=None).exclude(translators__in=[user]).order_by(
             "word"
         )[: user.number_of_words]
         if words.count() < 1:
