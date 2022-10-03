@@ -9,7 +9,7 @@ from django.http import (HttpResponse, HttpResponseForbidden,
 from django.utils.encoding import force_bytes
 from ninja import Router
 
-from .tasks import push
+from .tasks import handle_pr_comments, handle_push, handle_pull_request
 
 router = Router()
 
@@ -32,16 +32,17 @@ def manage_webhooks(request):
     )
     if not hmac.compare_digest(force_bytes(mac.hexdigest()), force_bytes(signature)):
         return HttpResponseForbidden("Permission denied.")
-
-    # If request reached this point we are in a good shape
-    # Process the GitHub events
     event = request.META.get("HTTP_X_GITHUB_EVENT", "ping")
-
-    if event == "ping":
-        return HttpResponse("pong")
-    elif event == "push":
-        t = threading.Thread(target=handle_push, args=(json.loads(request.body),))
-        t.start()
-        return HttpResponse("success")
-    # In case we receive an event that's not ping or push
+    match event:
+        case 'ping':
+            return HttpResponse("pong")
+        case "push":
+            t = threading.Thread(target=handle_push, args=(json.loads(request.body),))
+            t.start()
+            return HttpResponse("success")
+        case "pull_request":
+            t = threading.Thread(target=handle_pull_request, args=(json.loads(request.body),))
+            t.start()
+            return HttpResponse("success")
+        
     return HttpResponse(status=204)
