@@ -95,6 +95,59 @@ def handle_pull_request(payload: dict):
             [ref for ref in dictionary_repo.get_git_refs() if ref.ref == f'refs/heads/Torjoman-{word.word}'][0].delete()
         
 
+def handle_pr_comments(payload):
+    number = payload['issue']['number']
+    if not payload['comment']['user']['login'] in Moderator.get_all_moderators():
+        return
+    r = re.search(r'^/(?P<command>.+) (?P<translation>\d+)$', payload['comment']['body'])
+    word: str = re.search(r"^'(?P<word>.+)'\s", payload['issue']['body']).group('word')
+    translations: dict[str, str] = {i: t for i, t in re.findall(r"(?P<index>\d+)\. '(?P<translation>.+?)'", payload['issue']['body'])}
+    print(word, translations)
+    match r.group('command'):
+        case 'set-default':
+            w: Word = Word.objects.get(word=word)
+            tr: UserTranslation = UserTranslation.objects.get(
+                word=w,
+                translation=translations[r.group('translation')]
+            )
+            tr.score = w.usertranslation_set.first().score + 1
+            tr.save()
+            update_pull_request(number, w)
+        case _:
+            pass
+
+def update_json_file(word: Word, translations: list[str]) -> str:
+    """update_json_file Update word translations and return json as string.
+
+    Args:
+        word (Word): The word to update.
+        translations (list[str]): List of translations. Order is important.
+
+    Returns:
+        str: updated json file content as string
+    """
+
+def update_pull_request(number, word):
+    with open(settings.BASE_DIR / 'github_manager' / 'messages.json') as f:
+        messages = json.load(f)['pull_request']
+    pull = dictionary_repo.get_pull(number)
+    f = dictionary_repo.get_contents(os.environ.get('JSON_FILE'), ref=f"Torjoman-{word.word}")
+    dictionary_repo.update_file(
+        os.environ.get('JSON_FILE'),
+        f'Update {word.word} Translation To {word.usertranslation_set.first()}',
+        json.dumps(generate_dict_from_db(word), indent=4, ensure_ascii=False),
+        f.sha, branch = f"Torjoman-{word.word}"
+    )
+    body = messages['head'].format(word=word.word, translation=word.get_users_translations[0])
+    for index, translation in enumerate(word.get_users_translations[:5]):
+        body  += messages['other_translation'].format(index=index+1, translation=translation) + '\n'
+    body += '\n' + messages['footer']
+    pull.edit(
+        title=messages['title'].format(word=word.word, translation=word.get_users_translations[0]),
+        body=body,
+    )
+    
+
 def make_pull_request():
     """make_pull_request Get Words that have at least 5 translations and make a pull request
     """    

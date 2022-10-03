@@ -44,5 +44,8 @@ def manage_webhooks(request):
             t = threading.Thread(target=handle_pull_request, args=(json.loads(request.body),))
             t.start()
             return HttpResponse("success")
-        
+        case "issue_comment":
+            t = threading.Thread(target=handle_pr_comments, args=(json.loads(request.body),))
+            t.start()
+            return HttpResponse("success")
     return HttpResponse(status=204)
