@@ -34,11 +34,11 @@ def check_for_update_json():
             json.dump(server, f, ensure_ascii=False, indent=2)
 
 
-def generate_dict_from_db() -> list[dict]:
+def generate_dict_from_db(word: Word) -> list[dict]:
     return [
         {
             "word": w.word,
-            "translations": w.get_source_translations,
+            "translations": w.get_users_translations if w.word == word.word else w.get_source_translations,
             "is_checked": w.is_checked,
         }
         for w in Word.objects.all()
