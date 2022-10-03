@@ -9,11 +9,6 @@ class PullRequest(models.Model):
 class Moderator(models.Model):
     username = models.CharField(max_length=255)
     
-    @property
-    def get_all_moderators(self) -> list[str]:
-        """get_all_moderators Return a list of moderators usernames
-
-        Returns:
-            list[str]: The list of moderators usernames
-        """        
-        return [mod.username for mod in Moderator.objects.all()]
+    @classmethod
+    def get_all_moderators(cls) -> list[str]:
+        return [mod.username for mod in cls.objects.all()]
