@@ -4,12 +4,13 @@ import threading
 from hashlib import sha1
 
 from django.conf import settings
-from django.http import (HttpResponse, HttpResponseForbidden,
-                         HttpResponseServerError)
+from django.http import (
+    HttpResponse, HttpResponseForbidden, HttpResponseServerError,
+)
 from django.utils.encoding import force_bytes
 from ninja import Router
 
-from .tasks import handle_pr_comments, handle_push, handle_pull_request
+from .tasks import handle_pr_comments, handle_pull_request, handle_push
 
 router = Router()
 
@@ -34,18 +35,22 @@ def manage_webhooks(request):
         return HttpResponseForbidden("Permission denied.")
     event = request.META.get("HTTP_X_GITHUB_EVENT", "ping")
     match event:
-        case 'ping':
+        case "ping":
             return HttpResponse("pong")
         case "push":
             t = threading.Thread(target=handle_push, args=(json.loads(request.body),))
             t.start()
             return HttpResponse("success")
         case "pull_request":
-            t = threading.Thread(target=handle_pull_request, args=(json.loads(request.body),))
+            t = threading.Thread(
+                target=handle_pull_request, args=(json.loads(request.body),)
+            )
             t.start()
             return HttpResponse("success")
         case "issue_comment":
-            t = threading.Thread(target=handle_pr_comments, args=(json.loads(request.body),))
+            t = threading.Thread(
+                target=handle_pr_comments, args=(json.loads(request.body),)
+            )
             t.start()
             return HttpResponse("success")
     return HttpResponse(status=204)

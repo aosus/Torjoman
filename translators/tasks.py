@@ -13,9 +13,11 @@ def send_words():
     users = Translator.objects.all()
     print(f"Sending for {users.count()} users")
     for user in users:
-        words: list[Word] = Word.objects.filter(pullrequest=None).exclude(translators__in=[user]).order_by(
-            "word"
-        )[: user.number_of_words]
+        words: list[Word] = (
+            Word.objects.filter(pullrequest=None)
+            .exclude(translators__in=[user])
+            .order_by("word")[: user.number_of_words]
+        )
         if words.count() < 1:
             continue
         for platform in user.platform_set.filter(is_active=True):
