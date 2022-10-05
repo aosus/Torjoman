@@ -54,7 +54,7 @@ def update_source(local: list[dict], server: list[dict]):
     rlocal = list(itertools.filterfalse(lambda x: x in local, server))
     rserver = list(itertools.filterfalse(lambda x: x in server, local))
     deleted_words: list[str] = [
-        x["word"] for x in rserver if x["word"] not in [i["word"] for i in rlocal]
+        x["word"] for x in rserver if x and x["word"] not in [i["word"] for i in rlocal]
     ]
     for word in deleted_words:
         w: Word = Word.objects.get(word=word)
