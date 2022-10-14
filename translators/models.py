@@ -12,7 +12,7 @@ class Translator(models.Model):
     translated_words = models.ManyToManyField("translation.Word", blank=True)
 
     def get_platforms(self):
-        return [platform.name for platform in self.platform_set.all()]
+        return self.platform_set.objects.values_list("name")
 
     def __str__(self) -> str:
         return self.name
@@ -33,7 +33,7 @@ class Platform(models.Model):
         Returns:
           dict[str, Platform]: keys are platforms names, values are platforms instances
         """
-        return {f"{platform.name}": platform for platform in Platform.objects.all()}
+        return {platform.name: platform for platform in Platform.objects.all()}
 
     def __str__(self) -> str:
         return self.name

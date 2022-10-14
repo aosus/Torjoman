@@ -12,15 +12,11 @@ class Word(models.Model):
 
     @property
     def get_source_translations(self) -> list[str]:
-        return [
-            translation.translation for translation in self.sourcetranslation_set.all()
-        ]
+        return self.sourcetranslation_set.objects.values_list("translation")
 
     @property
     def get_users_translations(self) -> list[str]:
-        return [
-            translation.translation for translation in self.usertranslation_set.all()
-        ]
+        return self.usertranslation_set.objects.values_list("translation")
 
     def add_translation(self, translation: str) -> "UserTranslation":
         """add_translation Add new `UserTranslation` to word and increase score if similar translation was found.
@@ -32,8 +28,7 @@ class Word(models.Model):
                 UserTranslation: The new/similar translation object.
                 None: if the translation was empty.
         """
-        translation = translation.strip()
-        if translation == "":
+        if (translation := translation.strip()) == "":
             return
         match = get_close_match(translation, self.get_users_translations())
         if match:
