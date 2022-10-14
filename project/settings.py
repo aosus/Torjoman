@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+
 import environ
 
 env = environ.Env()
@@ -26,13 +27,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
-ALLOWED_HOSTS.append(env('HOST'))
+ALLOWED_HOSTS.append(env("HOST"))
 
 # Application definition
 
@@ -43,13 +44,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'ninja',
-    'django_q',
-
-    'cache_json.apps.CacheJsonConfig',
-    'translate.apps.TranslateConfig',
-    'translators.apps.TranslatorsConfig',
-    'github_manager.apps.GithubManagerConfig',
+    "django_q",
+    "ninja",
+    "translation.apps.TranslationConfig",
+    "translators.apps.TranslatorsConfig",
+    "github_manager.apps.GithubManagerConfig",
 ]
 
 MIDDLEWARE = [
@@ -88,14 +87,15 @@ WSGI_APPLICATION = "project.wsgi.application"
 
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env("DATABASE_NAME"),
-        'USER': env("DATABASE_USER"),
-        'PASSWORD': env("DATABASE_PASSWORD"),
-        'HOST': env("DATABASE_HOST"),
-        'PORT': env("DATABASE_PORT"),
-    }}
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": env("DATABASE_NAME"),
+        "USER": env("DATABASE_USER"),
+        "PASSWORD": env("DATABASE_PASSWORD"),
+        "HOST": env("DATABASE_HOST"),
+        "PORT": env("DATABASE_PORT"),
+    }
+}
 
 
 # Password validation
@@ -133,7 +133,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / 'static/'
+STATIC_ROOT = BASE_DIR / "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -143,14 +143,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 Q_CLUSTER = {
     "name": "torjoman",
-    'retry': 750,
-    'timeout': 600,
-    'redis': {
-        'host': '127.0.0.1',
-        'port': 6379,
-        'db': 0
-    }
+    "retry": 750,
+    "timeout": 600,
+    "redis": {"host": "127.0.0.1", "port": 6379, "db": 0},
 }
 
 
-GITHUB_WEBHOOK_KEY = env('GITHUB_WEBHOOK_KEY')
+GITHUB_WEBHOOK_KEY = env("GITHUB_WEBHOOK_KEY")
