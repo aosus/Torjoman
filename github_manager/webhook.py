@@ -15,7 +15,7 @@ from .tasks import handle_pr_comments, handle_pull_request, handle_push
 router = Router()
 
 
-@router.post("/")
+@router.post("/", include_in_schema=False)
 def manage_webhooks(request):
     # Verify the request signature
     header_signature = request.META.get("HTTP_X_HUB_SIGNATURE")
