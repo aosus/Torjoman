@@ -24,7 +24,7 @@ def send_words():
             data = {
                 "uuid": str(user.uuid),
                 "words": [
-                    {"word": word.word, "translates": word.get_translates()}
+                    {"word": word.word, "translates": word.get_source_translations}
                     for word in words
                 ],
             }
