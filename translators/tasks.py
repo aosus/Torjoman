@@ -9,8 +9,7 @@ from .models import Translator
 
 def send_words():
     now = datetime.now()
-    # users = Translator.objects.filter(send_time=f"{now.hour}:{now.minute}")
-    users = Translator.objects.all()
+    users = Translator.objects.filter(send_time=f"{now.hour}:{now.minute}")
     print(f"Sending for {users.count()} users")
     for user in users:
         words: list[Word] = (
@@ -24,7 +23,7 @@ def send_words():
             data = {
                 "uuid": str(user.uuid),
                 "words": [
-                    {"word": word.word, "translates": word.get_translates()}
+                    {"word": word.word, "translations": word.get_source_translations}
                     for word in words
                 ],
             }
