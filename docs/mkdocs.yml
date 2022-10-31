@@ -70,3 +70,4 @@ extra_css:
 nav:
   - المقدمة: "index.md" 
   - خطة مشروع تُرجمان: "project-plan.md"
+  - الواجهة البرمجية لتُرجمان: "api-docs.md"
