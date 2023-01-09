@@ -7,7 +7,7 @@
 
 -i https://pypi.org/simple/
 arrow==1.2.3; python_version >= '3.6'
-asgiref==3.5.2; python_version >= '3.7'
+asgiref==3.6.0; python_version >= '3.7'
 blessed==1.19.1; python_version >= '2.7'
 certifi==2022.12.7; python_version >= '3.6'
 cffi==1.15.1
