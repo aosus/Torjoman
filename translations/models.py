@@ -33,20 +33,19 @@ class Section(models.Model):
 
 class Sentence(models.Model):
     section = models.ForeignKey(Section, on_delete=models.CASCADE)
-    context = models.SlugField(max_length=250)
     sentence = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ("context",)
-        unique_together = ["section", "context"]
+        ordering = ("section", "sentence")
+        unique_together = ["section", "sentence"]
 
     def save(self, *args, **kwargs):
         self.context = self.context.lower()
         return super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.section}: {self.context}"
+        return f"{self.section}: {self.sentence[:10]}"
 
 
 class Translation(models.Model):
