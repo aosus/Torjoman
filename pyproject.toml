@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "torjoman"
+version = "0.1.0"
+description = "Torjoman aims to make translating more accessible to general users, by translating inside the users favourite Platforms"
+authors = ["Your Name <you@example.com>"]
+license = "AGPL-3.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "^4.1.6"
+django-ninja = "^0.20.0"
+django-environ = "^0.9.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
