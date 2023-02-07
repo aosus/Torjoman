@@ -16,7 +16,7 @@ class AccountsController(ControllerBase):
     def create_user(self, payload: UserCreateSchema):
         user = payload.to_model()
         return 200, create_token(user.id)
-    
+
     @route.post("update", response={200: UserSchema})
     def update_user(self, request, payload: UserUpdateSchema):
         user = payload.to_model(request.auth.username)

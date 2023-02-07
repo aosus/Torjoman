@@ -3,7 +3,10 @@ from heapq import nlargest as _nlargest
 
 import pyarabic.araby as araby  # Language specific module
 
-def get_close_match(word: str, possibilities: list[str], cutoff: float=0.8) -> str | None:
+
+def get_close_match(
+    word: str, possibilities: list[str], cutoff: float = 0.8
+) -> str | None:
     """Use SequenceMatcher to return a list of the indexes of the best "good enough" matches.
 
     Args:

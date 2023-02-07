@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     "ninja_extra",
     "translations.apps.TranslationsConfig",
     "accounts.apps.AccountsConfig",
-
 ]
 
 MIDDLEWARE = [
@@ -137,6 +136,6 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # JWT Auth Config
-JWT_SIGNING_KEY=env('JWT_SIGNING_KEY')
-JWT_ACCESS_EXPIRY= 24 * 7 * 4
+JWT_SIGNING_KEY = env("JWT_SIGNING_KEY")
+JWT_ACCESS_EXPIRY = 24 * 7 * 4
 JWT_REFRESH_EXPIRY = 24 * 7 * 4

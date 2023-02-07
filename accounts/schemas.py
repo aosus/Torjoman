@@ -18,10 +18,10 @@ class UserSchema(ModelSchema):
     class Config:
         model = User
         model_fields = ["id", "first_name", "last_name", "email", "username"]
-    
+
     def resolve_send_time(self, obj: User):
         return obj.profile.send_time
-    
+
     def resolve_number_of_words(self, obj: User):
         return obj.profile.number_of_words
 
@@ -56,7 +56,6 @@ class UserCreateSchema(ModelSchema):
         return user
 
 
-
 class UserUpdateSchema(ModelSchema):
     first_name: Optional[str] = Field(None, min_length=1, max_length=50)
     last_name: Optional[str] = Field(None, min_length=1, max_length=50)
@@ -79,6 +78,7 @@ class UserUpdateSchema(ModelSchema):
             user.profile.number_of_words = self.number_of_words
         user.save()
         return user
+
 
 class UserLoginSchema(ModelSchema):
     username: str = Field(..., min_length=5, max_length=50)
