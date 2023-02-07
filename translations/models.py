@@ -40,10 +40,6 @@ class Sentence(models.Model):
         ordering = ("section", "sentence")
         unique_together = ["section", "sentence"]
 
-    def save(self, *args, **kwargs):
-        self.context = self.context.lower()
-        return super().save(*args, **kwargs)
-
     def __str__(self):
         return f"{self.section}: {self.sentence[:10]}"
 
