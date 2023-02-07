@@ -1,8 +1,0 @@
-{
-    "pull_request": {
-        "title": "Change '{word}' Translation to '{translation}'",
-        "head": "'{word}' has reached the minimum translations limit\nThe New default Translation is: '{translation}'\n\nThese are the 5 most commoun translations:\n",
-        "other_translation": "{index}. '{translation}'",
-        "footer": "To change the default translation, write: /set-default NumberOfTranslation\nTo delete Specific translation, write: /delete NumberOfTranslation"
-    }
-}
