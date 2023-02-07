@@ -16,6 +16,18 @@ files = [
 tests = ["mypy (>=0.800)", "pytest", "pytest-asyncio"]
 
 [[package]]
+name = "contextlib2"
+version = "21.6.0"
+description = "Backports and enhancements for the contextlib module"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "contextlib2-21.6.0-py2.py3-none-any.whl", hash = "sha256:3fbdb64466afd23abaf6c977627b75b6139a5a3e8ce38405c5b413aed7a0471f"},
+    {file = "contextlib2-21.6.0.tar.gz", hash = "sha256:ab1e2bfe1d01d968e1b7e8d9023bc51ef3509bba217bb730cee3827e1ee82869"},
+]
+
+[[package]]
 name = "django"
 version = "4.1.6"
 description = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
@@ -73,6 +85,45 @@ pydantic = ">=1.6,<2.0.0"
 dev = ["pre-commit"]
 doc = ["markdown-include", "mkdocs", "mkdocs-material", "mkdocstrings"]
 test = ["black", "django-stubs", "flake8", "isort", "mypy (==0.931)", "psycopg2-binary", "pytest", "pytest-asyncio", "pytest-cov", "pytest-django"]
+
+[[package]]
+name = "django-ninja-extra"
+version = "0.18.2"
+description = "Django Ninja Extra - Class Based Utility and more for Django Ninja(Fast Django REST framework)"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "django-ninja-extra-0.18.2.tar.gz", hash = "sha256:97495767637579469ebd941e8712b0c109626b6e01368051693ef6e07d708784"},
+    {file = "django_ninja_extra-0.18.2-py3-none-any.whl", hash = "sha256:460af6ae4a86f48ebea3893afd5b49e5e5c63eade3ea0953f68903bbbd6451ec"},
+]
+
+[package.dependencies]
+asgiref = "*"
+contextlib2 = "*"
+Django = ">=2.2"
+django-ninja = ">=0.17.0"
+injector = "0.19.0"
+
+[package.extras]
+dev = ["pre-commit"]
+doc = ["markdown-include", "mdx-include (>=1.4.1,<2.0.0)", "mkdocs (>=1.1.2,<2.0.0)", "mkdocs-markdownextradata-plugin (>=0.1.7,<0.3.0)", "mkdocs-material (>=7.1.9,<8.0.0)", "mkdocstrings"]
+test = ["black", "django-stubs", "flake8", "injector (==0.19.0)", "isort", "mypy (==0.931)", "pytest", "pytest-asyncio", "pytest-cov", "pytest-django"]
+
+[[package]]
+name = "injector"
+version = "0.19.0"
+description = "Injector - Python dependency injection framework, inspired by Guice"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "injector-0.19.0-py2.py3-none-any.whl", hash = "sha256:2e5f5629d9c42f8ed8a3f8a5b4e9dc8ac80547cd95c7ce0bd0fc3f4baae6bc77"},
+    {file = "injector-0.19.0.tar.gz", hash = "sha256:3eaaf51cd3ba7be1354d92a5210c8bba43dd324300eafd214e1f2568834a912f"},
+]
+
+[package.extras]
+dev = ["black", "check-manifest", "dataclasses", "mypy", "pytest", "pytest-cov (>=2.5.1)"]
 
 [[package]]
 name = "psycopg2-binary"
@@ -247,4 +298,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "7a31bec389e44f1d933837d3f714bb9f91c7bcfc003cee7eed3a65a48fded714"
+content-hash = "e142b2f88008a1866124c77055a5caef3c3d69b3501f20145a452ace9b810c9b"
