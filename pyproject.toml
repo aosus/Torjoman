@@ -13,7 +13,12 @@ django-ninja = "^0.20.0"
 django-environ = "^0.9.0"
 psycopg2-binary = "^2.9.5"
 django-ninja-extra = "^0.18.2"
+pyjwt = "^2.6.0"
+pydantic = {extras = ["email"], version = "^1.10.4"}
 
+
+[tool.poetry.group.dev.dependencies]
+ipython = "^8.9.0"
 
 [build-system]
 requires = ["poetry-core"]
