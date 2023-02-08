@@ -22,7 +22,7 @@ class AccountsController(ControllerBase):
         user = payload.to_model(request.auth.username)
         return 200, user
 
-    @route.post("login", auth=None, )
+    @route.post("login", auth=None)
     def login(self, payload: UserLoginSchema) -> UserSchema:
         user = get_object_or_404(User, username=payload.username)
         if user.check_password(payload.password):
@@ -30,12 +30,12 @@ class AccountsController(ControllerBase):
         else:
             raise IncorrectPasswordError()
 
-    @route.post("refresh/{refresh_token}", response={200: TokensListSchema})
-    def refresh_tokens(self, refresh_token: str):
+    @route.post("refresh/{refresh_token}", auth=None)
+    def refresh_tokens(self, refresh_token: str) -> TokensListSchema:
         return refresh_access(refresh_token)
 
-    @route.post("change-password", response={200: TokensListSchema})
-    def change_password(self, payload: ChangePasswordSchema):
+    @route.post("change-password")
+    def change_password(self, payload: ChangePasswordSchema) -> TokensListSchema:
         u = get_object_or_404(User, email=payload.email)
         if u.check_password(payload.current_password):
             u.set_password(payload.new_password)
