@@ -12,22 +12,21 @@ class AccountsController(ControllerBase):
     def get_me(self, request):
         return request.auth
 
-    @route.post("", auth=None, response={200: TokensListSchema})
-    def create_user(self, payload: UserCreateSchema):
+    @route.post("", auth=None)
+    def create_user(self, payload: UserCreateSchema) -> UserSchema:
         user = payload.to_model()
-        return 200, create_token(user.id)
+        return 200, user
 
     @route.post("update", response={200: UserSchema})
     def update_user(self, request, payload: UserUpdateSchema):
         user = payload.to_model(request.auth.username)
         return 200, user
 
-    @route.post("login", auth=None, response={200: TokensListSchema})
-    def login(self, payload: UserLoginSchema):
+    @route.post("login", auth=None, )
+    def login(self, payload: UserLoginSchema) -> UserSchema:
         user = get_object_or_404(User, username=payload.username)
         if user.check_password(payload.password):
-            tokens = create_token(user.id)
-            return 200, tokens
+            return 200, user
         else:
             raise IncorrectPasswordError()
 

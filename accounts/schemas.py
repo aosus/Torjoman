@@ -1,10 +1,20 @@
 from django.shortcuts import get_object_or_404
 from pydantic import EmailStr
 from ninja import ModelSchema, Schema, Field
-from .utils import User
+from .utils import User, create_token
 from datetime import time
 from .errors import *
 from typing import Optional
+
+
+
+class TokensListSchema(Schema):
+    access: str
+    refresh: str
+
+
+class EmailSchema(Schema):
+    email: EmailStr
 
 
 class UserSchema(ModelSchema):
@@ -14,7 +24,8 @@ class UserSchema(ModelSchema):
     username: str = Field(..., min_length=5, max_length=50)
     send_time: time
     number_of_words: int = Field(6, gt=0, le=10)
-
+    tokens: TokensListSchema
+    
     class Config:
         model = User
         model_fields = ["id", "first_name", "last_name", "email", "username"]
@@ -24,6 +35,9 @@ class UserSchema(ModelSchema):
 
     def resolve_number_of_words(self, obj: User):
         return obj.profile.number_of_words
+    
+    def resolve_tokens(self, obj: User):
+        return create_token(obj.pk)
 
 
 class UserCreateSchema(ModelSchema):
@@ -89,13 +103,6 @@ class UserLoginSchema(ModelSchema):
         model_fields = ["username", "password"]
 
 
-class TokensListSchema(Schema):
-    access: str
-    refresh: str
-
-
-class EmailSchema(Schema):
-    email: EmailStr
 
 
 class ChangePasswordSchema(Schema):
