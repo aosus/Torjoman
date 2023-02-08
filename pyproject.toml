@@ -16,6 +16,7 @@ django-ninja-extra = "^0.18.2"
 pyjwt = "^2.6.0"
 pydantic = {extras = ["email"], version = "^1.10.4"}
 pyarabic = "^0.6.15"
+gunicorn = "^20.1.0"
 
 
 [tool.poetry.group.dev.dependencies]
