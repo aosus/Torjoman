@@ -7,7 +7,6 @@ from .errors import *
 from typing import Optional
 
 
-
 class TokensListSchema(Schema):
     access: str
     refresh: str
@@ -25,7 +24,7 @@ class UserSchema(ModelSchema):
     send_time: time
     number_of_words: int = Field(6, gt=0, le=10)
     tokens: TokensListSchema
-    
+
     class Config:
         model = User
         model_fields = ["id", "first_name", "last_name", "email", "username"]
@@ -35,7 +34,7 @@ class UserSchema(ModelSchema):
 
     def resolve_number_of_words(self, obj: User):
         return obj.profile.number_of_words
-    
+
     def resolve_tokens(self, obj: User):
         return create_token(obj.pk)
 
@@ -101,8 +100,6 @@ class UserLoginSchema(ModelSchema):
     class Config:
         model = User
         model_fields = ["username", "password"]
-
-
 
 
 class ChangePasswordSchema(Schema):

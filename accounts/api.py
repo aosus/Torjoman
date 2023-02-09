@@ -35,7 +35,9 @@ class AccountsController(ControllerBase):
         return refresh_access(refresh_token)
 
     @route.post("change-password")
-    def change_password(self, request, payload: ChangePasswordSchema) -> TokensListSchema:
+    def change_password(
+        self, request, payload: ChangePasswordSchema
+    ) -> TokensListSchema:
         u = request.auth
         if u.check_password(payload.current_password):
             u.set_password(payload.new_password)
