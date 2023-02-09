@@ -30,13 +30,13 @@ class AccountsController(ControllerBase):
         else:
             raise IncorrectPasswordError()
 
-    @route.post("refresh/{refresh_token}", auth=None)
+    @route.get("refresh/{refresh_token}", auth=None)
     def refresh_tokens(self, refresh_token: str) -> TokensListSchema:
         return refresh_access(refresh_token)
 
     @route.post("change-password")
-    def change_password(self, payload: ChangePasswordSchema) -> TokensListSchema:
-        u = get_object_or_404(User, email=payload.email)
+    def change_password(self, request, payload: ChangePasswordSchema) -> TokensListSchema:
+        u = request.auth
         if u.check_password(payload.current_password):
             u.set_password(payload.new_password)
             u.save()

@@ -106,6 +106,5 @@ class UserLoginSchema(ModelSchema):
 
 
 class ChangePasswordSchema(Schema):
-    username: str = Field(..., min_length=5, max_length=50)
-    old_password: str = Field(..., min_length=8, max_length=50)
+    current_password: str = Field(..., min_length=8, max_length=50)
     new_password: str = Field(..., min_length=8, max_length=50)

@@ -31,6 +31,9 @@ class ProjectController(ControllerBase):
 
     @route.post("update")
     def update_project(self, request, payload: ProjectUpdateSchema) -> ProjectSchema:
+        project = get_object_or_404(Project, pk=payload.id)
+        if project.owner != request.auth:
+            raise PermissionError()   
         project = payload.to_model(request.auth)
         return project
 
