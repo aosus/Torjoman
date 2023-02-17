@@ -29,7 +29,7 @@ class ProjectController(ControllerBase):
         project = payload.to_model(request.auth)
         return project
 
-    @route.post("update")
+    @route.put("")
     def update_project(self, request, payload: ProjectUpdateSchema) -> ProjectSchema:
         project = get_object_or_404(Project, pk=payload.id)
         if project.owner != request.auth:
@@ -53,7 +53,7 @@ class SectionController(ControllerBase):
         section = payload.to_model()
         return section
 
-    @route.post("update")
+    @route.put("update")
     def update_section(self, request, payload: SectionUpdateSchema) -> SectionSchema:
         section = get_object_or_404(Section, pk=payload.id)
         if section.project.owner != request.auth:
@@ -80,7 +80,7 @@ class SentenceController(ControllerBase):
         sentence = payload.to_model()
         return sentence
 
-    @route.post("update")
+    @route.put("update")
     def update_sentence(self, request, payload: SentenceUpdateSchema) -> SentenceSchema:
         sentence = get_object_or_404(Sentence, pk=payload.id)
         if sentence.section.project.owner != request.auth:
