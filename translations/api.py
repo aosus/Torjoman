@@ -62,7 +62,7 @@ class SectionController(ControllerBase):
         return section
 
 
-@api_controller("sentence/")
+@api_controller("sentences/")
 class SentenceController(ControllerBase):
     @route.get("", auth=None)
     @paginate(PageNumberPaginationExtra, page_size=50)
@@ -89,7 +89,7 @@ class SentenceController(ControllerBase):
         return sentence
 
 
-@api_controller("translation/")
+@api_controller("translations/")
 class TranslationController(ControllerBase):
     @route.get("", auth=None)
     @paginate(PageNumberPaginationExtra, page_size=20)
