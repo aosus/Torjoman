@@ -128,7 +128,7 @@ class TranslationListSchema(ModelSchema):
 
     class Config:
         model = Translation
-        model_fields = ["id", "translation", "translator"]
+        model_fields = ["id", "translation", "translator", "created_at"]
 
     def resolve_is_approved(self, obj: Translation) -> bool:
         return obj.is_approved
@@ -146,7 +146,7 @@ class TranslationSchema(ModelSchema):
 
     class Config:
         model = Translation
-        model_fields = ["id", "translator", "sentence", "translation", "voters"]
+        model_fields = ["id", "translator", "sentence", "translation", "voters", "created_at"]
 
     def resolve_is_approved(self, obj: Translation) -> bool:
         return obj.is_approved
