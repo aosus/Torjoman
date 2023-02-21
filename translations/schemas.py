@@ -92,7 +92,6 @@ class SentenceSchema(ModelSchema):
 
 class SentenceFullSchema(ModelSchema):
     translations: list[str]
-    section: SectionSchema
     
     class Config:
         model = Sentence

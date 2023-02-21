@@ -22,7 +22,12 @@ class ProjectController(ControllerBase):
         else:
             projects = Project.objects.all()
         return projects
-
+    
+    @route.get("{id}", auth=None)
+    def get_project(self, id: int) -> ProjectSchema:
+        project = get_object_or_404(Project, pk=id)
+        return project
+    
     @route.post("")
     def create_project(self, request, payload: ProjectCreateSchema) -> ProjectSchema:
         project = payload.to_model(request.auth)
@@ -44,6 +49,12 @@ class SectionController(ControllerBase):
         sections = Section.objects.filter(project=project)
         return sections
 
+    @route.get("{id}", auth=None)
+    def get_section(self, id: int) -> SectionSchema:
+        section = get_object_or_404(Section, pk=id)
+        return section
+    
+    
     @route.post("")
     def create_section(self, request, payload: SectionCreateSchema) -> SectionSchema:
         project = get_object_or_404(Project, pk=payload.project)
@@ -63,6 +74,7 @@ class SectionController(ControllerBase):
 
 @api_controller("sentences/")
 class SentenceController(ControllerBase):
+    
     @route.get("", auth=None)
     @paginate(PageNumberPaginationExtra, page_size=50)
     def list_section_sentences(
@@ -71,6 +83,11 @@ class SentenceController(ControllerBase):
         sentences = Sentence.objects.filter(section=section)
         return sentences
 
+    @route.get("{id}", auth=None)
+    def get_sentence(self, id: int) -> SentenceFullSchema:
+        sentence = get_object_or_404(Sentence, pk=id)
+        return sentence
+    
     @route.post("")
     def create_sentence(self, request, payload: SentenceCreateSchema) -> SentenceSchema:
         section = get_object_or_404(Section, pk=payload.section)
