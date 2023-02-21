@@ -1,14 +1,13 @@
 from ninja_extra import api_controller, ControllerBase, route
 from .schemas import *
 from .models import Project, Sentence
-from django.shortcuts import get_list_or_404
 from ninja_extra.pagination import (
     paginate,
     PageNumberPaginationExtra,
     PaginatedResponseSchema,
 )
 from .errors import *
-
+from django.db.models import Q
 
 @api_controller("projects/")
 class ProjectController(ControllerBase):
@@ -87,6 +86,14 @@ class SentenceController(ControllerBase):
             raise PermissionError()
         sentence = payload.to_model()
         return sentence
+    
+    @route.get("for-user")
+    def get_translation_for_user(self, request) -> list[SentenceFullSchema]:
+        limit: int = request.auth.profile.number_of_words
+        excluded_translations = Translation.objects.filter(Q(translator=request.auth) | Q(voters=request.auth))
+        excluded_sentences = Sentence.objects.filter(translation__in=excluded_translations)
+        remaining_sentences = Sentence.objects.exclude(id__in=excluded_sentences).order_by('sentence')[:limit]
+        return remaining_sentences
 
 
 @api_controller("translations/")

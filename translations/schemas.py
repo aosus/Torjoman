@@ -4,7 +4,7 @@ from .models import Project, Section, Sentence, Translation
 from django.contrib.auth.models import User
 from accounts.errors import AlreadyExistError
 from .utils import normalize_translation, get_close_match
-
+from django.db.models import Count
 
 class OwnerSchema(ModelSchema):
     class Config:
@@ -89,6 +89,15 @@ class SentenceSchema(ModelSchema):
     class Config:
         model = Sentence
         model_fields = ["id", "section", "sentence", "created_at"]
+
+class SentenceFullSchema(ModelSchema):
+    translations: list[str]
+    class Config:
+        model = Sentence
+        model_fields = ["id", "section", "sentence", "created_at"]
+    
+    def resolve_translations(self, obj: Sentence):
+        return Translation.objects.filter(sentence=obj).annotate(votes=Count("voters")).order_by("-votes").values_list('translation', flat=True)
 
 
 class SentenceCreateSchema(ModelSchema):
