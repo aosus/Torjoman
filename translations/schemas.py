@@ -92,6 +92,8 @@ class SentenceSchema(ModelSchema):
 
 class SentenceFullSchema(ModelSchema):
     translations: list[str]
+    section: SectionSchema
+    
     class Config:
         model = Sentence
         model_fields = ["id", "section", "sentence", "created_at"]
