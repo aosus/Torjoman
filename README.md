@@ -12,37 +12,31 @@ https://torjoman.aosus.dev
 https://torjoman.aosus.dev/project-plan/#_3
 
 ## How to run
-1. Install dependencies
-   * Using pipenv
-    	```pipenv install```
-   * Using pip
-		```pip install -r requirements.txt```
+1. Install dependencies Using poetry
+      ```shell
+      poetry install --no-root
+      ```
 2. Create `.env` file
    Create a .env file in `project` and fill it with the following data
    ```
    SECRET_KEY=
-   HOST=
-   GITHUB_ACCOUNT_TOKEN
-   GITHUB_WEBHOOK_KEY=
-   DATABASE_NAME=
+   DATABASE_HOST=localhost
+   DATABASE_PORT=5432
    DATABASE_USER=
    DATABASE_PASSWORD=
-   DATABASE_HOST=
-   DATABASE_PORT=5432
-   JSON_REPO=GtihubUser/REPO
-   JSON_FILE=PathToJsonFileInYourRepo
+   DATABASE_NAME=
+   JWT_SIGNING_KEY=
    ```
-   json file format example can be found in `json-example.json`
-3. Run ```python project/prepare-project.py```
-4. Create superuser account, Run ```python manage.py createsuperuser```
-5. Run ```python manage.py migrate```
-6. Static Files (css, js, images)
+3. Create superuser account, Run ```python manage.py createsuperuser```
+4. Run ```python manage.py migrate```
+5. Static Files (css, js, images)
       1. Run ```python manage.py collectstatic```
       2. serve static folder, see [here](https://docs.djangoproject.com/en/4.1/howto/static-files/deployment/)
-7. Run server. see [Here](https://docs.djangoproject.com/en/4.1/howto/deployment/)
-8. Wait for the server to finish extracting data from the json file. It will print `The first data extraction process has been completed` when it finishes
-9.  Set your github webhook payload url to `https://your-domain.com/api/webhook/`. Don't forget to set webhook key
-10. Add some platfroms endpoints to deal with from `htStps://your-domain.com/admin`
+6. Run server. see [Here](https://docs.djangoproject.com/en/4.1/howto/deployment/). you can use the following command **just for testing**
+   ```shell
+   poetry run ./manage.py runserver           
+   ```
+
 
 
 
