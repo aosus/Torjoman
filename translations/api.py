@@ -83,7 +83,6 @@ class SentenceController(ControllerBase):
         sentences = Sentence.objects.filter(section=section)
         return sentences
 
-    
     @route.post("")
     def create_sentence(self, request, payload: SentenceCreateSchema) -> SentenceSchema:
         section = get_object_or_404(Section, pk=payload.section)
@@ -100,7 +99,7 @@ class SentenceController(ControllerBase):
         sentence = payload.to_model()
         return sentence
     
-    @route.get("for-user")
+    @route.get("for-user", description="Get `n` number of sentences that were not translated by user.\n\n`n` is number_of_words that user has chosen")
     def get_sentences_for_user(self, request) -> list[SentenceFullSchema]:
         limit: int = request.auth.profile.number_of_words
         excluded_translations = Translation.objects.filter(Q(translator=request.auth) | Q(voters=request.auth))
