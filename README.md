@@ -26,7 +26,9 @@ https://torjoman.aosus.dev/project-plan/#_3
    DATABASE_PASSWORD=
    DATABASE_NAME=
    JWT_SIGNING_KEY=
+   HOST_NAME=
    ```
+   write your hostname without `www.`, like `torjoman.com` or `torjoman.aosus.org`.
 3. Create superuser account, Run ```python manage.py createsuperuser```
 4. Run ```python manage.py migrate```
 5. Static Files (css, js, images)
