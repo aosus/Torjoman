@@ -12,11 +12,12 @@ https://torjoman.aosus.dev
 https://torjoman.aosus.dev/project-plan/#_3
 
 ## How to run
-1. Install dependencies Using poetry
+1. Install dependencies Using [poetry](https://python-poetry.org/)
       ```shell
       poetry install --no-root
       ```
-2. Create `.env` file
+2. Setup environment variables
+
    Create a .env file in `project` and fill it with the following data
    ```
    SECRET_KEY=
@@ -29,15 +30,32 @@ https://torjoman.aosus.dev/project-plan/#_3
    HOST_NAME=
    ```
    write your hostname without `www.`, like `torjoman.com` or `torjoman.aosus.org`.
-3. Create superuser account, Run ```python manage.py createsuperuser```
-4. Run ```python manage.py migrate```
+   
+   If you are using system environment variables you can ignore `.env` file creation
+3. Creating admin account
+
+      Run the following command and follow the instructions.
+      ```shell
+      python manage.py createsuperuser
+      ```
+4. Migrating models to database
+
+      Run this command:
+      ```
+      python manage.py migrate
+      ```
 5. Static Files (css, js, images)
-      1. Run ```python manage.py collectstatic```
+      1. Run this command to generate static files:
+            ```shell
+            python manage.py collectstatic
+            ```
       2. serve static folder, see [here](https://docs.djangoproject.com/en/4.1/howto/static-files/deployment/)
-6. Run server. see [Here](https://docs.djangoproject.com/en/4.1/howto/deployment/). you can use the following command **just for testing**
-   ```shell
-   poetry run ./manage.py runserver           
-   ```
+6. Run server. see [Here](https://docs.djangoproject.com/en/4.1/howto/deployment/).
+
+      you can use the following command **just for testing**
+      ```shell
+      poetry run ./manage.py runserver           
+      ```
 
 
 
