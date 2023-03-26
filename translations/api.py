@@ -83,10 +83,6 @@ class SentenceController(ControllerBase):
         sentences = Sentence.objects.filter(section=section)
         return sentences
 
-    @route.get("{id}", auth=None)
-    def get_sentence(self, id: int) -> SentenceFullSchema:
-        sentence = get_object_or_404(Sentence, pk=id)
-        return sentence
     
     @route.post("")
     def create_sentence(self, request, payload: SentenceCreateSchema) -> SentenceSchema:
@@ -105,13 +101,17 @@ class SentenceController(ControllerBase):
         return sentence
     
     @route.get("for-user")
-    def get_translation_for_user(self, request) -> list[SentenceFullSchema]:
+    def get_sentences_for_user(self, request) -> list[SentenceFullSchema]:
         limit: int = request.auth.profile.number_of_words
         excluded_translations = Translation.objects.filter(Q(translator=request.auth) | Q(voters=request.auth))
         excluded_sentences = Sentence.objects.filter(translation__in=excluded_translations)
         remaining_sentences = Sentence.objects.exclude(id__in=excluded_sentences).order_by('sentence')[:limit]
         return remaining_sentences
 
+    @route.get("{id}", auth=None)
+    def get_sentence(self, id: int) -> SentenceFullSchema:
+        sentence = get_object_or_404(Sentence, pk=id)
+        return sentence
 
 @api_controller("translations/")
 class TranslationController(ControllerBase):
