@@ -1,3 +1,4 @@
+from typing import Optional
 from ninja_extra import api_controller, ControllerBase, route
 from .schemas import *
 from .models import Project, Sentence
@@ -99,15 +100,20 @@ class SentenceController(ControllerBase):
         sentence = payload.to_model()
         return sentence
     
-    @route.get("for-user", description="Get `n` number of sentences that were not translated by user.\n\n`n` is number_of_words that user has chosen")
-    def get_sentences_for_user(self, request) -> list[SentenceFullSchema]:
+    @route.get("for-user", description="Get `n` number of sentences that were not translated by user.\n\n`n` is number_of_words that user has chosen\n\nYou can filter these sentences by project or section. if you pass both then project will be ignored")
+    def get_sentences_for_user(self, request, project: Optional[int] = None, section: Optional[int] = None) -> list[SentenceFullSchema]:
         limit: int = request.auth.profile.number_of_words
         excluded_translations = Translation.objects.filter(Q(translator=request.auth) | Q(voters=request.auth))
         excluded_sentences = Sentence.objects.filter(translation__in=excluded_translations)
-        remaining_sentences = Sentence.objects.exclude(id__in=excluded_sentences).order_by('sentence')[:limit]
+        remaining_sentences = Sentence.objects.exclude(id__in=excluded_sentences).order_by('sentence')
+        if section is not None:
+            remaining_sentences = remaining_sentences.filter(section=section)
+        elif project is not None:
+            remaining_sentences = remaining_sentences.filter(section__project=project)
+        remaining_sentences = remaining_sentences[:limit]
         return remaining_sentences
 
-    @route.get("{id}", auth=None)
+    @route.get("{int:id}", auth=None)
     def get_sentence(self, id: int) -> SentenceFullSchema:
         sentence = get_object_or_404(Sentence, pk=id)
         return sentence
