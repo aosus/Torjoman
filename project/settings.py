@@ -142,11 +142,15 @@ JWT_REFRESH_EXPIRY = 24 * 7 * 4
 
 
 if DEBUG is False:
-    ALLOWED_HOSTS.append(f".{env('HOST_NAME')}")
+    host_name: str = env('HOST_NAME')
+    ALLOWED_HOSTS.append(f"{host_name}")
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
-    CSRF_TRUSTED_ORIGINS = [f'https://*.{env("HOST_NAME")}']
+    CSRF_TRUSTED_ORIGINS = [f'https://{host_name}']
+    if not host_name.startswith('www.'):
+        ALLOWED_HOSTS.append(f"{host_name}")
+        CSRF_TRUSTED_ORIGINS = [f'https://www.{host_name}']
